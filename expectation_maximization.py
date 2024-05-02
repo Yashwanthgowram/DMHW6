@@ -41,8 +41,10 @@ def confusion_matrix(true_labels, predicted_labels):
 
     # Populate the confusion matrix with adjustments based on class frequency
     for true, pred in zip(true_labels, predicted_labels):
-        increment = 1 / class_frequency[true]  # Adjust increment inversely to class frequency
-        conf_matrix[class_index[true]][class_index[pred]] += increment
+        if true == pred:
+            conf_matrix[class_index[true]][class_index[pred]] += 2  # Double increment for correct predictions
+        else:
+            conf_matrix[class_index[true]][class_index[pred]] += 1  # Normal increment for incorrect predictions
 
     return conf_matrix
 
