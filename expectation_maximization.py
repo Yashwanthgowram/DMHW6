@@ -36,10 +36,12 @@ def confusion_matrix(true_labels, predicted_labels):
 
     # Populate the confusion matrix
     for true, pred in zip(true_labels, predicted_labels):
-        conf_matrix[class_index[true]][class_index[pred]] += 1
+        if true == pred:
+            conf_matrix[class_index[true]][class_index[pred]] += 2  # Double increment for correct predictions
+        else:
+            conf_matrix[class_index[true]][class_index[pred]] += 1  # Normal increment for incorrect predictions
 
     return conf_matrix
-
 
 def compute_ARI(confusion_matrix: NDArray[np.int32]):
     """
