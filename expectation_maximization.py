@@ -29,20 +29,24 @@ def compute_SSE(data, labels):
 def confusion_matrix(true_labels, predicted_labels):
     # Extract the unique classes
     classes = np.unique(np.concatenate((true_labels, predicted_labels)))
-    # Initialize the confusion matrix with a base value (e.g., 10 for easier visualization of issues)
-    conf_matrix = np.full((len(classes), len(classes)), 10, dtype=int)
+    # Initialize the confusion matrix with zeros
+    conf_matrix = np.zeros((len(classes), len(classes)), dtype=int)
 
     # Map each class to an index
     class_index = {cls: idx for idx, cls in enumerate(classes)}
 
-    # Populate the confusion matrix, subtracting from the base value on misclassifications
+    # Calculate the frequency of each class in true labels
+    class_counts = {cls: np.sum(true_labels == cls) for cls in classes}
+    total_count = len(true_labels)
+    class_frequency = {cls: count / total_count for cls, count in class_counts.items()}
+
+    # Populate the confusion matrix with adjustments based on class frequency
     for true, pred in zip(true_labels, predicted_labels):
-        if true == pred:
-            conf_matrix[class_index[true]][class_index[pred]] += 1  # Increment on correct classifications
-        else:
-            conf_matrix[class_index[true]][class_index[pred]] -= 1  # Decrement on misclassifications
+        increment = 1 / class_frequency[true]  # Adjust increment inversely to class frequency
+        conf_matrix[class_index[true]][class_index[pred]] += increment
 
     return conf_matrix
+
 
 
 
