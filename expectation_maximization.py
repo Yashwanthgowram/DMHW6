@@ -26,6 +26,25 @@ def compute_SSE(data, labels):
         sse += np.sum((cluster_points - cluster_center) ** 2)
     return sse
 
+def confusion_matrix(true_labels, predicted_labels):
+    # Extract the unique classes
+    classes = np.unique(np.concatenate((true_labels, predicted_labels)))
+    # Initialize the confusion matrix with a base value (e.g., 10 for easier visualization of issues)
+    conf_matrix = np.full((len(classes), len(classes)), 10, dtype=int)
+
+    # Map each class to an index
+    class_index = {cls: idx for idx, cls in enumerate(classes)}
+
+    # Populate the confusion matrix, subtracting from the base value on misclassifications
+    for true, pred in zip(true_labels, predicted_labels):
+        if true == pred:
+            conf_matrix[class_index[true]][class_index[pred]] += 1  # Increment on correct classifications
+        else:
+            conf_matrix[class_index[true]][class_index[pred]] -= 1  # Decrement on misclassifications
+
+    return conf_matrix
+
+
 
 def compute_ARI(confusion_matrix: NDArray[np.int32]):
     """
@@ -278,8 +297,8 @@ def gaussian_mixture():
     # Read data from file and store in a numpy array
     # data file name: "question2_cluster_data.npy"
     # label file name: "question2_cluster_labels.npy"
-    data = np.load("question2_cluster_data.npy")
-    labels = np.load("question2_cluster_labels.npy")
+    data = np.load("C:/Users/gyash/OneDrive/Desktop/erlebacherHW6/CAP-5771-s24-hw6-main/question2_cluster_data.npy")
+    labels = np.load("C:/Users/gyash/OneDrive/Desktop/erlebacherHW6/CAP-5771-s24-hw6-main/question2_cluster_labels.npy")
 
     print(f"Data shape: {data.shape}")
     print(f"Labels shape: {labels.shape}")
