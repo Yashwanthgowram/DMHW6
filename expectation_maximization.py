@@ -2,7 +2,6 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy.typing import NDArray
-from sklearn.metrics import confusion_matrix
 
 # ----------------------------------------------------------------------
 
@@ -293,9 +292,9 @@ def gaussian_mixture():
     # Read data from file and store in a numpy array
     # data file name: "question2_cluster_data.npy"
     # label file name: "question2_cluster_labels.npy"
-    data = np.load("question2_cluster_data.npy")
-    labels = np.load("question2_cluster_labels.npy")
-
+    data = np.load("C:/Users/gyash/OneDrive/Desktop/erlebacherHW6/CAP-5771-s24-hw6-main/question2_cluster_data.npy")
+    labels = np.load("C:/Users/gyash/OneDrive/Desktop/erlebacherHW6/CAP-5771-s24-hw6-main/question2_cluster_labels.npy")
+    
     print(f"Data shape: {data.shape}")
     print(f"Labels shape: {labels.shape}")
 
