@@ -163,8 +163,8 @@ def jarvis_patrick_clustering():
         answers (dict): A dictionary containing the clustering results.
     """
     answers = {}
-    data = np.load("C:/Users/gyash/OneDrive/Desktop/erlebacherHW6/CAP-5771-s24-hw6-main/question1_cluster_data.npy")
-    true_labels=np.load("C:/Users/gyash/OneDrive/Desktop/erlebacherHW6/CAP-5771-s24-hw6-main/question1_cluster_labels.npy")
+    data = np.load("question1_cluster_data.npy")
+    true_labels=np.load("question1_cluster_labels.npy")
 
     # Return your `jarvis_patrick` function
     answers["jarvis_patrick_function"] = jarvis_patrick
