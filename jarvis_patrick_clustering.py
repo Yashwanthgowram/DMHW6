@@ -228,17 +228,16 @@ def jarvis_patrick_clustering():
     # All plots must have x and y labels, a title, and the grid overlay.
 
     # Plot is the return value of a call to plt.scatter()
-    plot_ARI = plt.scatter(data[1000*highest_ari_index:(highest_ari_index+1)*1000, 0], data[1000*highest_ari_index:(highest_ari_index+1)*1000, 1], c=preds_final[highest_ari_index], cmap='viridis', marker='.')
+    plot_ARI = plt.scatter(data[1000*highest_ari_index:(highest_ari_index+1)*1000, 0], data[1000*highest_ari_index:(highest_ari_index+1)*1000, 1], c=preds_final[highest_ari_index] if np.any(preds_final[highest_ari_index]) else [0] * len(data[1000*highest_ari_index:(highest_ari_index+1)*1000]), cmap='viridis', marker='.')
     plot_SSE = plt.scatter([1,2,3], [4,5,6])
     plt.title('Largest ARI')
     plt.xlabel(f'Feature 1 for Dataset{i+1}')
     plt.ylabel(f'Feature 2 for Dataset{i+1}')
-
     plt.grid(True)
     plt.savefig("LargestARI_JP.png")
 
 
-    plot_SSE=plt.scatter(data[1000*least_sse_index:(least_sse_index+1)*1000, 0], data[1000*least_sse_index:(least_sse_index+1)*1000, 1], c=preds_final[least_sse_index], cmap='viridis', marker='.')
+    plot_SSE = plt.scatter(data[1000*least_sse_index:(least_sse_index+1)*1000, 0], data[1000*least_sse_index:(least_sse_index+1)*1000, 1], c=preds_final[least_sse_index] if np.any(preds_final[least_sse_index]) else [0] * len(data[1000*least_sse_index:(least_sse_index+1)*1000]), cmap='viridis', marker='.')
     # plt.scatter(true_labelsv[:, 0], true_labelsv[:, 1], c=datav, cmap='viridis', marker='.')
     plt.title('Least SSE')
     plt.xlabel(f'Feature 1 for Dataset{i+1}')
